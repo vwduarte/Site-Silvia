@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador para Aposentadoria de Silvia Meireles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://img.freepik.com/vetores-premium/garota-de-chapeu-na-praia-vetor_519955-4.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .contador {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .contador h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .contador p {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="contador">
+        <h1>Contador de Aposentadoria de Silvia</h1>
+        <p id="contador"></p>
+    </div>
+    <script>
+        function atualizarContador() {
+            const dataAposentadoria = new Date('2028-07-31T00:00:00');
+            const agora = new Date();
+            const diferenca = dataAposentadoria - agora;
+
+            const anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365));
+            const meses = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            document.getElementById('contador').innerHTML = 
+                `${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+
+            if (diferenca < 0) {
+                clearInterval(intervalo);
+                document.getElementById('contador').innerHTML = "Parabéns pela aposentadoria!";
+            }
+        }
+
+        const intervalo = setInterval(atualizarContador, 1000);
+    </script>
+</body>
+</html>
